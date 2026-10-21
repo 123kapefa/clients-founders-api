@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\Teledok.Shared.SharedKernel\Teledok.Shared.SharedKernel.csproj" />
+    </ItemGroup>
+
+</Project>

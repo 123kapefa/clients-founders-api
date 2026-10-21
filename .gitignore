@@ -1,0 +1,33 @@
+# Build
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.efbundle
+
+# NuGet
+/packages/
+*.nupkg
+
+# IDE
+.idea/
+.vs/
+.vscode/
+*.user
+*.suo
+riderModule.iml
+/_ReSharper.Caches/
+
+# Tests
+TestResults/
+coverage*.json
+coverage*.xml
+
+# Local config / secrets
+appsettings.*.local.json
+.env
+*.env.local
+
+# OS
+.DS_Store
+Thumbs.db

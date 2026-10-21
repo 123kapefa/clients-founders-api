@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Shared/">
+    <Project Path="src/Shared/Teledok.Shared.Core/Teledok.Shared.Core.csproj" />
+    <Project Path="src/Shared/Teledok.Shared.Framework/Teledok.Shared.Framework.csproj" />
+    <Project Path="src/Shared/Teledok.Shared.SharedKernel/Teledok.Shared.SharedKernel.csproj" />
+  </Folder>
+  <Project Path="src/Teledok.Api/Teledok.Api.csproj" />
+  <Project Path="src/Teledok.Application/Teledok.Application.csproj" />
+  <Project Path="src/Teledok.Contracts/Teledok.Contracts.csproj" />
+  <Project Path="src/Teledok.Domain/Teledok.Domain.csproj" />
+  <Project Path="src/Teledok.Infrastructure.Postgres/Teledok.Infrastructure.Postgres.csproj" />
+</Solution>

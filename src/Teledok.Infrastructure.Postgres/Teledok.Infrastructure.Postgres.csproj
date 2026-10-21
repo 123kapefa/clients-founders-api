@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\Teledok.Application\Teledok.Application.csproj" />
+      <ProjectReference Include="..\Teledok.Domain\Teledok.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,9 +1,14 @@
 <Solution>
   <Folder Name="/Shared/">
-    <Project Path="src/Shared/Teledok.Shared.Core/Teledok.Shared.Core.csproj" />
-    <Project Path="src/Shared/Teledok.Shared.Framework/Teledok.Shared.Framework.csproj" />
-    <Project Path="src/Shared/Teledok.Shared.SharedKernel/Teledok.Shared.SharedKernel.csproj" />
+    <Project Path="src\Shared\Teledok.Shared.Core\Teledok.Shared.Core.csproj" />
+    <Project Path="src\Shared\Teledok.Shared.Framework\Teledok.Shared.Framework.csproj" />
+    <Project Path="src\Shared\Teledok.Shared.SharedKernel\Teledok.Shared.SharedKernel.csproj" />
   </Folder>
+
+  <Folder Name="/Tests/">
+    <Project Path="tests/Teledok.Domain.Tests/Teledok.Domain.Tests.csproj" />
+  </Folder>
+
   <Project Path="src/Teledok.Api/Teledok.Api.csproj" />
   <Project Path="src/Teledok.Application/Teledok.Application.csproj" />
   <Project Path="src/Teledok.Contracts/Teledok.Contracts.csproj" />

@@ -1,0 +1,31 @@
+# Global AnalyzerConfig: severity of analyzer rules for the whole solution.
+# .editorconfig keeps only code style and naming; dotnet_diagnostic.* lives here.
+#
+# Auto-discovered by the SDK at the solution root.
+# Do NOT register via <GlobalAnalyzerConfigFiles/> (duplicates drop overrides).
+#
+# Policy: a rule is either an error (TreatWarningsAsErrors) or disabled
+# with a documented reason. Add a rule here only when it actually fires.
+
+is_global = true
+
+# ==============================================================================
+# Category-wide severity
+# ==============================================================================
+dotnet_analyzer_diagnostic.category-security.severity = error
+
+# ==============================================================================
+# .NET CA rules: disabled with reasons
+# ==============================================================================
+
+# Project convention: UPPER_SNAKE_CASE for enum members and constants
+# (ErrorType.NOT_FOUND, PageResult.MAX_PAGE_SIZE). Also allows test names
+# like Create_WithInvalidInn_ReturnsError.
+dotnet_diagnostic.CA1707.severity = none
+
+# "Shared" is a reserved word in Visual Basic; namespaces Teledok.Shared.*
+# are consumed only from C#.
+dotnet_diagnostic.CA1716.severity = none
+
+# Static factories on generic types (Envelope<T>.Ok / Fail) are intentional.
+dotnet_diagnostic.CA1000.severity = none

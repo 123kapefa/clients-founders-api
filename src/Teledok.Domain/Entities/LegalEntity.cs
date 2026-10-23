@@ -9,15 +9,13 @@ namespace Teledok.Domain.Entities;
 
 public sealed class LegalEntity : Client
 {
-    public override ClientType Type => ClientType.LEGAL_ENTITY;
-
     private readonly List<LegalEntityFounder> _founders = [];
 
     public IReadOnlyList<LegalEntityFounder> Founders => _founders;
 
     private LegalEntity() { }
 
-    private LegalEntity(Inn inn, ClientName name) : base(inn, name) { }
+    private LegalEntity(Inn inn, ClientName name) : base(inn, name, ClientType.LEGAL_ENTITY) { }
 
     public static Result<LegalEntity, Error> Create(Inn inn, ClientName name)
     {

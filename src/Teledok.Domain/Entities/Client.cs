@@ -10,7 +10,7 @@ public abstract class Client : Entity, IAuditable, ISoftDeletable
 
     public ClientName Name { get; private set; } = null!;
 
-    public abstract ClientType Type { get; }
+    public ClientType Type { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 
@@ -22,10 +22,11 @@ public abstract class Client : Entity, IAuditable, ISoftDeletable
 
     protected Client() { }
 
-    protected Client(Inn inn, ClientName name)
+    protected Client(Inn inn, ClientName name, ClientType type)
     {
         Inn = inn;
         Name = name;
+        Type = type;
     }
 
     public void Rename(ClientName name)

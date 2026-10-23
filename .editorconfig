@@ -206,3 +206,9 @@ dotnet_naming_rule.types_and_members_pascal.severity = warning
 dotnet_naming_rule.parameters_and_locals_camel.symbols = parameters_and_locals
 dotnet_naming_rule.parameters_and_locals_camel.style = camel_case
 dotnet_naming_rule.parameters_and_locals_camel.severity = warning
+
+# ============================================================================
+# EF Core migrations: generated code, excluded from analyzers and formatting
+# ============================================================================
+[**/Migrations/*.cs]
+generated_code = true

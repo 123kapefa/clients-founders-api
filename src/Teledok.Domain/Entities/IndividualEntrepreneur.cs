@@ -10,7 +10,7 @@ namespace Teledok.Domain.Entities;
 
 public sealed class IndividualEntrepreneur : Client
 {
-    public override ClientType Type => ClientType.LEGAL_ENTITY;
+    public override ClientType Type => ClientType.INDIVIDUAL_ENTREPRENEUR;
 
     private IndividualEntrepreneur() { }
 

@@ -1,9 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <ItemGroup>
-      <ProjectReference Include="..\Shared\Teledok.Shared.Core\Teledok.Shared.Core.csproj" />
-      <ProjectReference Include="..\Teledok.Contracts\Teledok.Contracts.csproj" />
-      <ProjectReference Include="..\Teledok.Domain\Teledok.Domain.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation"/>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Teledok.Shared.Core\Teledok.Shared.Core.csproj"/>
+    <ProjectReference Include="..\Teledok.Contracts\Teledok.Contracts.csproj"/>
+    <ProjectReference Include="..\Teledok.Domain\Teledok.Domain.csproj"/>
+  </ItemGroup>
 
 </Project>

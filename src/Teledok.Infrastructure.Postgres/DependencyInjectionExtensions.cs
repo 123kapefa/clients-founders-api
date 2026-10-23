@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+using Teledok.Infrastructure.Postgres.Database;
 using Teledok.Infrastructure.Postgres.Interceptors;
+using Teledok.Shared.Core.Database;
 
 namespace Teledok.Infrastructure.Postgres;
 
@@ -26,6 +28,8 @@ public static class DependencyInjectionExtensions
             ConfigureDbContext(options, connectionString);
             options.AddInterceptors(serviceProvider.GetRequiredService<AuditableInterceptor>());
         });
+
+        services.AddScoped<ITransactionManager, TransactionManager>();
 
         return services;
     }

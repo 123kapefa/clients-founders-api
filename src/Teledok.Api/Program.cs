@@ -1,17 +1,15 @@
+using Teledok.Application;
 using Teledok.Infrastructure.Postgres;
+using Teledok.Shared.Framework;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+builder.Services.AddApiDefaults();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructurePostgres(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+app.UseApiDefaults();
 
-app.UseHttpsRedirection();
-
-app.Run();
+await app.RunAsync();

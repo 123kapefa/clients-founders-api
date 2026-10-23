@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
+using Teledok.Infrastructure.Postgres.Interceptors;
 
 namespace Teledok.Infrastructure.Postgres;
 
@@ -15,7 +18,15 @@ public static class DependencyInjectionExtensions
         string connectionString = configuration.GetConnectionString(CONNECTION_STRING_NAME)
             ?? throw new InvalidOperationException($"Connection string '{CONNECTION_STRING_NAME}' is not configured.");
 
-        services.AddDbContext<TeledokDbContext>(options => ConfigureDbContext(options, connectionString));
+        services.TryAddSingleton(TimeProvider.System);
+        services.AddScoped<AuditableInterceptor>();
+
+        services.AddDbContext<TeledokDbContext>((serviceProvider, options) =>
+        {
+            ConfigureDbContext(options, connectionString);
+            options.AddInterceptors(serviceProvider.GetRequiredService<AuditableInterceptor>());
+        });
+
         return services;
     }
 

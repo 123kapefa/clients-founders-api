@@ -12,7 +12,7 @@ internal sealed class LegalEntityConfiguration : IEntityTypeConfiguration<LegalE
         builder.HasMany(x => x.Founders)
             .WithOne()
             .HasForeignKey(x => x.LegalEntityId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.ClientCascade);
 
         builder.Navigation(x => x.Founders)
             .UsePropertyAccessMode(PropertyAccessMode.Field);

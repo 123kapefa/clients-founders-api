@@ -1,4 +1,18 @@
 <Solution>
+  <Folder Name="/Build/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
+    <File Path="NuGet.Config" />
+  </Folder>
+  <Folder Name="/Code Style/">
+    <File Path=".editorconfig" />
+    <File Path=".globalconfig" />
+  </Folder>
+  <Folder Name="/Docker/">
+    <File Path="docker-compose.yml" />
+  </Folder>
   <Folder Name="/Shared/">
     <Project Path="src\Shared\Teledok.Shared.Core\Teledok.Shared.Core.csproj" />
     <Project Path="src\Shared\Teledok.Shared.Framework\Teledok.Shared.Framework.csproj" />
@@ -7,6 +21,7 @@
 
   <Folder Name="/Tests/">
     <Project Path="tests/Teledok.Domain.Tests/Teledok.Domain.Tests.csproj" />
+    <Project Path="tests\Teledok.Api.IntegrationTests\Teledok.Api.IntegrationTests.csproj" />
   </Folder>
 
   <Project Path="src/Teledok.Api/Teledok.Api.csproj" />

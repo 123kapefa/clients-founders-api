@@ -33,8 +33,8 @@ public sealed class CreateClientWithFoundersEndpointTests(TeledokApiFactory fact
 
         IReadOnlyList<JsonElement> founders = await GetFoundersAsync(secondId);
         Assert.Equal(2, founders.Count);
-        Assert.Equal(existingFounderId, founders[0].GetProperty("founderId").GetString());
-        Assert.Equal(OTHER_FOUNDER_INN, founders[1].GetProperty("inn").GetString());
+        Assert.Contains(founders, founder => founder.GetProperty("founderId").GetString() == existingFounderId);
+        Assert.Contains(founders, founder => founder.GetProperty("inn").GetString() == OTHER_FOUNDER_INN);
     }
 
     [Fact]

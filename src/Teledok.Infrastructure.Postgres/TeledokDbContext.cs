@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 
+using Teledok.Application.Abstractions;
 using Teledok.Domain.Entities;
 
 namespace Teledok.Infrastructure.Postgres;
 
-public sealed class TeledokDbContext(DbContextOptions<TeledokDbContext> options) : DbContext(options)
+public sealed class TeledokDbContext(DbContextOptions<TeledokDbContext> options) : DbContext(options), IReadDbContext
 {
     public const string SCHEMA = "teledok";
 
@@ -15,6 +16,8 @@ public sealed class TeledokDbContext(DbContextOptions<TeledokDbContext> options)
     public DbSet<Founder> Founders => Set<Founder>();
 
     public DbSet<LegalEntityFounder> LegalEntityFounders => Set<LegalEntityFounder>();
+
+    IQueryable<Client> IReadDbContext.Clients => Clients.AsNoTracking();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

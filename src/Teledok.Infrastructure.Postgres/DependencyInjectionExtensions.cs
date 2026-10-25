@@ -3,8 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+using Teledok.Application.Abstractions;
 using Teledok.Infrastructure.Postgres.Database;
 using Teledok.Infrastructure.Postgres.Interceptors;
+using Teledok.Infrastructure.Postgres.Repositories;
 using Teledok.Shared.Core.Database;
 
 namespace Teledok.Infrastructure.Postgres;
@@ -30,6 +32,8 @@ public static class DependencyInjectionExtensions
         });
 
         services.AddScoped<ITransactionManager, TransactionManager>();
+        services.AddScoped<IReadDbContext>(serviceProvider => serviceProvider.GetRequiredService<TeledokDbContext>());
+        services.AddScoped<IClientsRepository, ClientsRepository>();
 
         return services;
     }
@@ -41,3 +45,4 @@ public static class DependencyInjectionExtensions
                 npgsql => npgsql.MigrationsHistoryTable(TeledokDbContext.MIGRATIONS_HISTORY_TABLE, TeledokDbContext.SCHEMA))
             .UseSnakeCaseNamingConvention();
 }
+

@@ -15,5 +15,4 @@ public static class LegalEntityErrors
             "legal.entity.founder.not.found",
             "Учредитель не привязан к юридическому лицу",
             "founderId");
-
 }

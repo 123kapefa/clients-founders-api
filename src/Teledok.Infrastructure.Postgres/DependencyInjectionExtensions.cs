@@ -34,6 +34,7 @@ public static class DependencyInjectionExtensions
         services.AddScoped<ITransactionManager, TransactionManager>();
         services.AddScoped<IReadDbContext>(serviceProvider => serviceProvider.GetRequiredService<TeledokDbContext>());
         services.AddScoped<IClientsRepository, ClientsRepository>();
+        services.AddScoped<IFoundersRepository, FoundersRepository>();
 
         return services;
     }

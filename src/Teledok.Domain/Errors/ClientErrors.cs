@@ -24,4 +24,9 @@ public static class ClientErrors
             "client.type.invalid",
             "Тип клиента должен быть LEGAL_ENTITY или INDIVIDUAL_ENTREPRENEUR",
             "type");
+
+    public static Error FoundersNotSupported() =>
+        Error.Validation(
+            "client.founders.not.supported",
+            "Учредители есть только у юридических лиц");
 }

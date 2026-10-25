@@ -11,9 +11,9 @@ using Teledok.Shared.SharedKernel;
 namespace Teledok.Application.Clients.Queries.GetClientById;
 
 public sealed class GetClientByIdHandler(IReadDbContext readDbContext)
-    : IQueryHandler<ClientResponse, GetClientByIdQuery>
+    : IQueryHandler<ClientDetailsResponse, GetClientByIdQuery>
 {
-    public async Task<Result<ClientResponse, Error>> Handle(GetClientByIdQuery query, CancellationToken cancellationToken = default)
+    public async Task<Result<ClientDetailsResponse, Error>> Handle(GetClientByIdQuery query, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(query);
 
@@ -28,8 +28,31 @@ public sealed class GetClientByIdHandler(IReadDbContext readDbContext)
                 x.UpdatedAt))
             .FirstOrDefaultAsync(cancellationToken);
 
-        return client is null
-            ? ClientErrors.NotFound()
-            : client;
+        if (client is null)
+        {
+            return ClientErrors.NotFound();
+        }
+
+        List<ClientFounderResponse> founders = await readDbContext.LegalEntityFounders
+            .Where(x => x.LegalEntityId == query.Id)
+            .OrderBy(x => x.CreatedAt)
+            .ThenBy(x => x.Id)
+            .Select(x => new ClientFounderResponse(
+                x.FounderId,
+                x.Founder.Inn.Value,
+                x.Founder.FullName.LastName,
+                x.Founder.FullName.FirstName,
+                x.Founder.FullName.MiddleName,
+                x.CreatedAt))
+            .ToListAsync(cancellationToken);
+
+        return new ClientDetailsResponse(
+            client.Id,
+            client.Type,
+            client.Inn,
+            client.Name,
+            client.CreatedAt,
+            client.UpdatedAt,
+            founders);
     }
 }

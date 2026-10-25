@@ -27,10 +27,6 @@ public sealed class Founder : Entity, IAuditable, ISoftDeletable
     {
         Inn = inn;
         FullName = fullName;
-        CreatedAt = DateTime.UtcNow;
-        UpdatedAt = DateTime.UtcNow;
-        IsDeleted = false;
-        DeletedAt = null;
     }
 
     public static Result<Founder, Error> Create(Inn inn, FullName fullName)

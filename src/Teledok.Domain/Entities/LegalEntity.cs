@@ -68,5 +68,4 @@ public sealed class LegalEntity : Client
 
         return UnitResult.Success<Error>();
     }
-
 }

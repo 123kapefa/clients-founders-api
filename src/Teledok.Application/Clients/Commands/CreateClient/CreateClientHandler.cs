@@ -88,7 +88,8 @@ public sealed class CreateClientHandler(
     }
 
     private async Task<Result<List<Founder>, Error>> ResolveFoundersAsync(
-    IReadOnlyList<AddFounderRequest> requests, CancellationToken cancellationToken)
+    IReadOnlyList<AddFounderRequest> requests,
+    CancellationToken cancellationToken)
     {
         List<Founder> founders = [];
 

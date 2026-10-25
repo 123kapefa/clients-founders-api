@@ -20,8 +20,6 @@ public sealed record Error
         Behavior = behavior;
     }
 
-    public string GetMessage() => string.Join(';', Messages.Select(message => $"{message.Code}: {message.Message}"));
-
     public static Error Validation(string code, string message, string? invalidField = null) =>
         new([new ErrorMessage(code, message, invalidField)], ErrorType.VALIDATION);
 

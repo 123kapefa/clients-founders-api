@@ -20,5 +20,4 @@ internal sealed class FoundersRepository(TeledokDbContext dbContext) : IFounders
 
     public Task<bool> HasActiveLinksAsync(Guid founderId, CancellationToken cancellationToken = default) =>
         dbContext.LegalEntityFounders.AnyAsync(x => x.FounderId == founderId, cancellationToken);
-
 }

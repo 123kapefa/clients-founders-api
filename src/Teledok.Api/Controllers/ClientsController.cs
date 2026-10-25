@@ -25,9 +25,9 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     [ProducesResponseType<Envelope>(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> Create(
-    [FromBody] CreateClientRequest request,
-    [FromServices] CreateClientHandler handler,
-    CancellationToken cancellationToken)
+        [FromBody] CreateClientRequest request,
+        [FromServices] CreateClientHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new CreateClientCommand(request), cancellationToken);
 
@@ -38,9 +38,9 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope<ClientDetailsResponse>>(StatusCodes.Status200OK)]
     [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(
-    Guid id,
-    [FromServices] GetClientByIdHandler handler,
-    CancellationToken cancellationToken)
+        Guid id,
+        [FromServices] GetClientByIdHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new GetClientByIdQuery(id), cancellationToken);
 
@@ -51,9 +51,9 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope<PageResult<ClientResponse>>>(StatusCodes.Status200OK)]
     [ProducesResponseType<Envelope>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetList(
-    [FromQuery] GetClientsRequest request,
-    [FromServices] GetClientsHandler handler,
-    CancellationToken cancellationToken)
+        [FromQuery] GetClientsRequest request,
+        [FromServices] GetClientsHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new GetClientsQuery(request), cancellationToken);
 
@@ -65,10 +65,10 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope>(StatusCodes.Status400BadRequest)]
     [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(
-    Guid id,
-    [FromBody] UpdateClientRequest request,
-    [FromServices] UpdateClientHandler handler,
-    CancellationToken cancellationToken)
+        Guid id,
+        [FromBody] UpdateClientRequest request,
+        [FromServices] UpdateClientHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new UpdateClientCommand(id, request), cancellationToken);
 
@@ -79,9 +79,9 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope>(StatusCodes.Status200OK)]
     [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(
-    Guid id,
-    [FromServices] DeleteClientHandler handler,
-    CancellationToken cancellationToken)
+        Guid id,
+        [FromServices] DeleteClientHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new DeleteClientCommand(id), cancellationToken);
 
@@ -94,10 +94,10 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     [ProducesResponseType<Envelope>(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> AddFounder(
-    Guid id,
-    [FromBody] AddFounderRequest request,
-    [FromServices] AddFounderHandler handler,
-    CancellationToken cancellationToken)
+        Guid id,
+        [FromBody] AddFounderRequest request,
+        [FromServices] AddFounderHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new AddFounderCommand(id, request), cancellationToken);
 
@@ -109,10 +109,10 @@ public sealed class ClientsController : ControllerBase
     [ProducesResponseType<Envelope>(StatusCodes.Status400BadRequest)]
     [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> RemoveFounder(
-    Guid id,
-    Guid founderId,
-    [FromServices] RemoveFounderHandler handler,
-    CancellationToken cancellationToken)
+        Guid id,
+        Guid founderId,
+        [FromServices] RemoveFounderHandler handler,
+        CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new RemoveFounderCommand(id, founderId), cancellationToken);
 

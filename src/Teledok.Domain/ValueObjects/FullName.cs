@@ -13,7 +13,7 @@ public sealed record FullName
 
     public string LastName { get; }
 
-    public string? MiddleName { get; } = null!;
+    public string? MiddleName { get; }
 
     private FullName(string lastName, string firstName, string? middleName)
     {

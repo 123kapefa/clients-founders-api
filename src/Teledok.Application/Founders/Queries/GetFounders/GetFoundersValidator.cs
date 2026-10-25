@@ -24,5 +24,4 @@ public sealed class GetFoundersValidator : AbstractValidator<GetFoundersRequest>
             .WithErrorCode("founders.search.too.long")
             .WithMessage($"Строка поиска не может быть длиннее {SEARCH_MAX_LENGTH} символов");
     }
-
 }

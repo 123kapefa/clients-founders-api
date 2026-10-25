@@ -42,6 +42,4 @@ public static class PageResult
 
         return new PageResult<T>(items, page, pageSize, totalCount);
     }
-
-    public static PageResult<T> Empty<T>(int page, int pageSize) => Create<T>([], page, pageSize, 0);
 }

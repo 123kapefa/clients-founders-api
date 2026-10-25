@@ -41,7 +41,6 @@ public static class DependencyInjectionExtensions
             app.MapScalarApiReference();
         }
 
-        app.UseHttpsRedirection();
         app.MapControllers();
 
         return app;

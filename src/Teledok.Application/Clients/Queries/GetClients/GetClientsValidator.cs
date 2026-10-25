@@ -1,8 +1,8 @@
 using FluentValidation;
 
+using Teledok.Application.Common;
 using Teledok.Contracts.Clients.Requests;
 using Teledok.Domain.Enums;
-using Teledok.Shared.SharedKernel;
 
 namespace Teledok.Application.Clients.Queries.GetClients;
 
@@ -13,16 +13,12 @@ public sealed class GetClientsValidator : AbstractValidator<GetClientsRequest>
     public GetClientsValidator()
     {
         RuleFor(x => x.Page)
-            .GreaterThanOrEqualTo(1)
-            .When(x => x.Page is not null)
-            .WithErrorCode("clients.page.invalid")
-            .WithMessage("Номер страницы должен быть не меньше 1");
+            .MustBeValidPage("clients.page.invalid")
+            .When(x => x.Page is not null);
 
         RuleFor(x => x.PageSize)
-            .InclusiveBetween(1, PageResult.MAX_PAGE_SIZE)
-            .When(x => x.PageSize is not null)
-            .WithErrorCode("clients.page.size.invalid")
-            .WithMessage($"Размер страницы должен быть от 1 до {PageResult.MAX_PAGE_SIZE}");
+            .MustBeValidPageSize("clients.page.size.invalid")
+            .When(x => x.PageSize is not null);
 
         RuleFor(x => x.Type)
             .Must(type => Enum.TryParse<ClientType>(type, ignoreCase: false, out _) && !int.TryParse(type, out _))

@@ -18,4 +18,9 @@ public static class FounderErrors
             "founder.full.name.mismatch",
             "Учредитель с этим ИНН уже существует с другим ФИО",
             "inn");
+
+    public static Error HasActiveLinks() =>
+        Error.Conflict(
+            "founder.has.active.links",
+            "Учредитель привязан к юридическим лицам, сначала отвяжите его");
 }

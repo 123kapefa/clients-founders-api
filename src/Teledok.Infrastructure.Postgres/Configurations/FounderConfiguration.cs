@@ -26,17 +26,17 @@ internal sealed class FounderConfiguration : IEntityTypeConfiguration<Founder>
         {
             fullName.Property(x => x.LastName)
                 .HasColumnName("last_name")
-                .HasMaxLength(FullName.PART_MAX_LENGTH)
+                .HasColumnType("citext")
                 .IsRequired();
 
             fullName.Property(x => x.FirstName)
                 .HasColumnName("first_name")
-                .HasMaxLength(FullName.PART_MAX_LENGTH)
+                .HasColumnType("citext")
                 .IsRequired();
 
             fullName.Property(x => x.MiddleName)
                 .HasColumnName("middle_name")
-                .HasMaxLength(FullName.PART_MAX_LENGTH);
+                .HasColumnType("citext");
         });
 
         builder.HasIndex(x => x.Inn)

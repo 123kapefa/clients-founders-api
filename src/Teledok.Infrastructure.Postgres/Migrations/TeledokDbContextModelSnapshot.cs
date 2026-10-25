@@ -118,19 +118,16 @@ namespace Teledok.Infrastructure.Postgres.Migrations
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
+                                .HasColumnType("citext")
                                 .HasColumnName("first_name");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
+                                .HasColumnType("citext")
                                 .HasColumnName("last_name");
 
                             b1.Property<string>("MiddleName")
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
+                                .HasColumnType("citext")
                                 .HasColumnName("middle_name");
                         });
 

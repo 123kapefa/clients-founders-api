@@ -19,6 +19,8 @@ public sealed class TeledokDbContext(DbContextOptions<TeledokDbContext> options)
 
     IQueryable<Client> IReadDbContext.Clients => Clients.AsNoTracking();
 
+    IQueryable<Founder> IReadDbContext.Founders => Founders.AsNoTracking();
+
     IQueryable<LegalEntityFounder> IReadDbContext.LegalEntityFounders => LegalEntityFounders.AsNoTracking();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

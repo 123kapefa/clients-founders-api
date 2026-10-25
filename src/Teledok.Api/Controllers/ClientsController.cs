@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using Teledok.Application.Clients.Commands.CreateClient;
+using Teledok.Application.Clients.Commands.UpdateClient;
 using Teledok.Application.Clients.Queries.GetClientById;
 using Teledok.Application.Clients.Queries.GetClients;
 using Teledok.Contracts.Clients.Requests;
@@ -51,6 +52,21 @@ public sealed class ClientsController : ControllerBase
     CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new GetClientsQuery(request), cancellationToken);
+
+        return result.ToActionResult();
+    }
+
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType<Envelope<ClientResponse>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<Envelope>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(
+    Guid id,
+    [FromBody] UpdateClientRequest request,
+    [FromServices] UpdateClientHandler handler,
+    CancellationToken cancellationToken)
+    {
+        var result = await handler.Handle(new UpdateClientCommand(id, request), cancellationToken);
 
         return result.ToActionResult();
     }

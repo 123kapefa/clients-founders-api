@@ -5,4 +5,6 @@ namespace Teledok.Application.Abstractions;
 public interface IClientsRepository
 {
     void Add(Client client);
+
+    Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }

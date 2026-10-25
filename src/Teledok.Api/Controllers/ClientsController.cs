@@ -22,6 +22,7 @@ public sealed class ClientsController : ControllerBase
     [HttpPost]
     [ProducesResponseType<Envelope<Guid>>(StatusCodes.Status201Created)]
     [ProducesResponseType<Envelope>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
     [ProducesResponseType<Envelope>(StatusCodes.Status409Conflict)]
     public async Task<IActionResult> Create(
     [FromBody] CreateClientRequest request,

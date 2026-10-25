@@ -50,6 +50,10 @@ public sealed record Error
 
     public Error AsPermanent() => new(Messages, Type, ErrorBehavior.PERMANENT);
 
+    public Error WithFieldPrefix(string prefix) => new([.. Messages.Select(message => message with {
+            InvalidField = message.InvalidField is null ? prefix : $"{prefix}.{message.InvalidField}",
+        })], Type, Behavior);
+
     public bool Equals(Error? other) =>
         other is not null
         && Type == other.Type

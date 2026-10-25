@@ -21,6 +21,35 @@ public sealed class LegalEntityFounderTests
     }
 
     [Fact]
+    public void Create_WithFounders_AddsLinks()
+    {
+        Founder founder = CreateFounder();
+
+        Result<LegalEntity, Error> result = LegalEntity.Create(
+            Inn.Of(LEGAL_ENTITY_INN).Value,
+            ClientName.Of("ООО «Ромашка»").Value,
+            [founder]);
+
+        Assert.True(result.IsSuccess);
+        LegalEntityFounder link = Assert.Single(result.Value.Founders);
+        Assert.Equal(result.Value.Id, link.LegalEntityId);
+        Assert.Equal(founder.Id, link.FounderId);
+    }
+
+    [Fact]
+    public void Create_WithSameFounderTwice_ReturnsConflict()
+    {
+        Founder founder = CreateFounder();
+
+        Result<LegalEntity, Error> result = LegalEntity.Create(
+            Inn.Of(LEGAL_ENTITY_INN).Value,
+            ClientName.Of("ООО «Ромашка»").Value,
+            [founder, founder]);
+
+        AssertError(result, ErrorType.CONFLICT, "legal.entity.founder.already.added");
+    }
+
+    [Fact]
     public void AddFounder_WithNewFounder_AddsLink()
     {
         LegalEntity legalEntity = CreateLegalEntity();

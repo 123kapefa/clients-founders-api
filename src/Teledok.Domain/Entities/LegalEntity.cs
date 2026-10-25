@@ -17,7 +17,7 @@ public sealed class LegalEntity : Client
 
     private LegalEntity(Inn inn, ClientName name) : base(inn, name, ClientType.LEGAL_ENTITY) { }
 
-    public static Result<LegalEntity, Error> Create(Inn inn, ClientName name)
+    public static Result<LegalEntity, Error> Create(Inn inn, ClientName name, IEnumerable<Founder>? founders = null)
     {
         ArgumentNullException.ThrowIfNull(inn);
         ArgumentNullException.ThrowIfNull(name);
@@ -27,7 +27,18 @@ public sealed class LegalEntity : Client
             return ClientErrors.LegalEntityInnRequired();
         }
 
-        return new LegalEntity(inn, name);
+        var legalEntity = new LegalEntity(inn, name);
+
+        foreach (Founder founder in founders ?? [])
+        {
+            UnitResult<Error> added = legalEntity.AddFounder(founder);
+            if (added.IsFailure)
+            {
+                return added.Error;
+            }
+        }
+
+        return legalEntity;
     }
 
     public UnitResult<Error> AddFounder(Founder founder)

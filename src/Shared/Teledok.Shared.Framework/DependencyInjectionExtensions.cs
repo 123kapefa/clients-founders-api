@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Scalar.AspNetCore;
 
 using Teledok.Shared.Framework.Exceptions;
+using Teledok.Shared.Framework.Results;
 
 namespace Teledok.Shared.Framework;
 
@@ -16,7 +17,8 @@ public static class DependencyInjectionExtensions
     {
         services
             .AddControllers()
-            .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
+            .ConfigureApiBehaviorOptions(options => options.InvalidModelStateResponseFactory = InvalidModelStateResponse.Create);
 
         services.ConfigureHttpJsonOptions(options => options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 

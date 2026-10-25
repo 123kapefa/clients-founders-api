@@ -34,7 +34,8 @@ internal static class InvalidModelStateResponse
     {
         string field = key.StartsWith("$.", StringComparison.Ordinal) ? key[2..] : key;
 
-        return string.IsNullOrEmpty(field) || field == "$" ? null : field;
+        return string.IsNullOrEmpty(field) || field == "$"
+            ? null
+            : char.ToLowerInvariant(field[0]) + field[1..];
     }
-
 }

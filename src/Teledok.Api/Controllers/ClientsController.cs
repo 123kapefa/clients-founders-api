@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Teledok.Application.Clients.Commands.CreateClient;
 using Teledok.Application.Clients.Queries.GetClientById;
+using Teledok.Application.Clients.Queries.GetClients;
 using Teledok.Contracts.Clients.Requests;
 using Teledok.Contracts.Clients.Responses;
 using Teledok.Shared.Framework.Results;
@@ -37,6 +38,19 @@ public sealed class ClientsController : ControllerBase
     CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new GetClientByIdQuery(id), cancellationToken);
+
+        return result.ToActionResult();
+    }
+
+    [HttpGet]
+    [ProducesResponseType<Envelope<PageResult<ClientResponse>>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<Envelope>(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetList(
+    [FromQuery] GetClientsRequest request,
+    [FromServices] GetClientsHandler handler,
+    CancellationToken cancellationToken)
+    {
+        var result = await handler.Handle(new GetClientsQuery(request), cancellationToken);
 
         return result.ToActionResult();
     }

@@ -22,6 +22,7 @@ public sealed class TeledokDbContext(DbContextOptions<TeledokDbContext> options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(SCHEMA);
+        modelBuilder.HasPostgresExtension("citext");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TeledokDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);

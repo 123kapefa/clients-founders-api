@@ -24,10 +24,13 @@ internal sealed class ClientConfiguration : IEntityTypeConfiguration<Client>
             .HasMaxLength(Inn.PERSON_LENGTH)
             .IsRequired();
 
-        builder.Property(x => x.Name)
-            .HasConversion(name => name.Value, value => ClientName.Of(value).Value)
-            .HasMaxLength(ClientName.MAX_LENGTH)
-            .IsRequired();
+        builder.ComplexProperty(x => x.Name, name =>
+        {
+            name.Property(x => x.Value)
+                .HasColumnName("name")
+                .HasColumnType("citext")
+                .IsRequired();
+        });
 
         builder.Property(x => x.Type)
             .HasConversion<string>()

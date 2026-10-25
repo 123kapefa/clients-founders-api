@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using Teledok.Application.Clients.Commands.CreateClient;
+using Teledok.Application.Clients.Commands.DeleteClient;
 using Teledok.Application.Clients.Commands.UpdateClient;
 using Teledok.Application.Clients.Queries.GetClientById;
 using Teledok.Application.Clients.Queries.GetClients;
@@ -67,6 +68,19 @@ public sealed class ClientsController : ControllerBase
     CancellationToken cancellationToken)
     {
         var result = await handler.Handle(new UpdateClientCommand(id, request), cancellationToken);
+
+        return result.ToActionResult();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType<Envelope>(StatusCodes.Status200OK)]
+    [ProducesResponseType<Envelope>(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(
+    Guid id,
+    [FromServices] DeleteClientHandler handler,
+    CancellationToken cancellationToken)
+    {
+        var result = await handler.Handle(new DeleteClientCommand(id), cancellationToken);
 
         return result.ToActionResult();
     }

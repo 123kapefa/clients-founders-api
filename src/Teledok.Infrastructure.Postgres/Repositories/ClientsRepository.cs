@@ -9,6 +9,10 @@ internal sealed class ClientsRepository(TeledokDbContext dbContext) : IClientsRe
 {
     public void Add(Client client) => dbContext.Clients.Add(client);
 
+    public void Remove(Client client) => dbContext.Clients.Remove(client);
+
     public Task<Client?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
-        dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        dbContext.Clients
+            .Include(x => ((LegalEntity)x).Founders)
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 }
